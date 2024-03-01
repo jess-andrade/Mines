@@ -1,62 +1,65 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-
-
+import React, { Component } from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
 } from 'react-native';
 
 import Field from './src/components/Field';
 import params from './src/params';
+import MineField from './src/components/MineField';
+import {
+  createMinedBoard
+} from './src/functions'
 
 
-function App(): React.JSX.Element {
+//function App(): React.JSX.Element {
+export default class App extends Component {
 
-  return (
-    <SafeAreaView style={styles.container} >
+  constructor(props: any) {
+    super(props)
+    this.state = this.createState()
+  }
 
-      <Text style={styles.text}>Starting MINES!</Text>
-      <Text style={styles.text}> Grid Size:
-        {params.getRowsAmount()}x{params.getColumnsAmount()}</Text>
+  minesAmount = () => {
+    const cols = params.getColumnsAmount()
+    const rows = params.getRowsAmount()
+    return Math.ceil(cols * rows * params.difficultLevel)
+  }
 
-      <Field />
-      <Field opened nearMines={1} />
-      <Field opened nearMines={2} />
-      <Field mined />
-      <Field mined opened />
-      <Field mined opened exploded />
-      <Field flagged />
-      <Field flagged opened />
+  createState = () => {
+    const cols = params.getColumnsAmount()
+    const rows = params.getRowsAmount()
+    return {
+      board: createMinedBoard(rows, cols, this.minesAmount()),
+    }
+  }
 
+  render() {
+    return (
+      <SafeAreaView style={styles.container} >
 
-    </SafeAreaView>
-  );
+        <Text >Starting MINES!</Text>
+        <Text> Grid Size:
+          {params.getRowsAmount()}x{params.getColumnsAmount()}</Text>
+        <View style={styles.board}>
+          <MineField board={this.state.board} />
+        </View>
+
+      </SafeAreaView>
+    );
+  }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
-  text: {
-    fontSize: 20,
-    textAlign: 'center',
+  board: {
+    alignItems: 'center',
+    backgroundColor: '#AAA',
   },
 
 });
 
-export default App;

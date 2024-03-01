@@ -1,5 +1,3 @@
-import { TurboModuleRegistry } from 'react-native'
-
 const createBoard = (rows, columns) => {
   //To create the 'board' i have a array of arrays w objects I created
 
@@ -26,7 +24,7 @@ const spreadMines = (board, minesAmount) => {
   while (minesPlanted < minesAmount) {
     //rowSel = selected row --- columnSel = selected column
     const rowSel = parseInt(Math.random() * rows, 10)
-    const columnSel = parseInt(Math.random() * rows, 10)
+    const columnSel = parseInt(Math.random() * columns, 10)
 
     if (!board[rowSel][columnSel].mined) {
       board[rowSel][columnSel].mined = true
