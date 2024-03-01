@@ -6,7 +6,7 @@ export default props => {
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={require('../images/hairbow.png')}
+        source={require('../images/melody2.png')}
       />
     </View>
   )
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 23,
-    height: 20,
+    height: 23,
   }
 
 })
