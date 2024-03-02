@@ -63,6 +63,7 @@ const getNeighbors = (board, row, column) => {
       }
     })
   })
+  return neighbors
 }
 //--find out if there are mines in the neighbors
 const safeNeighborhood = (board, row, column) => {
