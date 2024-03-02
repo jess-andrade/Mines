@@ -111,7 +111,7 @@ const invertFlag = (board, row, column) => {
 }
 
 // how many flags r used
-const flagUsed = board => fields(board)
+const flagsUsed = board => fields(board)
   .filter(field => field.flagged).length
 
 export {
@@ -121,5 +121,6 @@ export {
   hadExplosion,
   wonGame,
   showMines,
-  invertFlag
+  invertFlag,
+  flagsUsed
 }
