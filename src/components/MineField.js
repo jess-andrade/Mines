@@ -18,6 +18,6 @@ export default props => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#b3dbed'
+    backgroundColor: '#fdf2fa'
   }
 })

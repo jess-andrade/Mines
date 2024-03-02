@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   },
   board: {
     alignItems: 'center',
-    backgroundColor: '#b3dbed',
+    backgroundColor: '#fdf2fa',
   },
 
 });
