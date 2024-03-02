@@ -22,6 +22,8 @@ import {
   invertFlag,
   flagsUsed
 } from './src/functions'
+import Lose from './src/screens/Lose';
+import Win from './src/screens/Win';
 
 
 //function App(): React.JSX.Element {
@@ -46,6 +48,8 @@ export default class App extends Component {
       won: false,
       lost: false,
       showLevelSelection: false,
+      showLose: false,
+      showWin: false,
     }
   }
 
@@ -57,11 +61,11 @@ export default class App extends Component {
 
     if (lost) {
       showMines(board)
-      Alert.alert('KUROMI DESTROYED EVERYTHING')
+      this.setState({ showLose: true })
     }
 
     if (won) {
-      Alert.alert('YOU WIN!')
+      this.setState({ showWin: true })
     }
 
     this.setState({ board, lost, won })
@@ -73,7 +77,7 @@ export default class App extends Component {
     const won = wonGame(board)
 
     if (won) {
-      Alert.alert('YOU WIN!')
+      this.setState({ showWin: true })
     }
     this.setState({ board, won })
   }
@@ -83,12 +87,24 @@ export default class App extends Component {
     this.setState(this.createState())
   }
 
+  onLose = () => {
+    this.setState(this.createState())
+  }
+
+  onWin = () => {
+    this.setState(this.createState())
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container} >
         <LevelSelection isVisible={this.state.showLevelSelection}
           onLevelSelected={this.onLevelSelected}
           onCancel={() => this.setState({ showLevelSelection: false })} />
+        <Lose isVisible={this.state.showLose}
+          onCancel={() => this.setState({ showLose: false })} />
+        <Win isVisible={this.state.showWin}
+          onCancel={() => this.setState({ showWin: false })} />
         <Header flagsLeft={this.minesAmount() - flagsUsed(this.state.board)}
           onNewGame={() => this.setState(this.createState())}
           onFlagPress={() => this.setState({ showLevelSelection: true })} />
